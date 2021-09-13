@@ -1,0 +1,185 @@
+body,
+html {
+  min-height: 100%;
+  overflow-x: hidden;
+}
+
+.task-section {
+  overflow: hidden;
+  padding-top: 50px;
+}
+
+.container {
+  max-width: 1495px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 23px;
+  font-size: 17px;
+  margin-bottom: 4rem;
+}
+
+.mt-10 {
+  margin-top: 10px;
+}
+
+.col-6 {
+  width: 46%;
+}
+
+.item-task {
+  border-bottom: 1px solid #000;
+  padding: 13px 20px 10px;
+}
+
+th,
+td {
+  text-align: center;
+  padding: 10px 16px;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+button {
+  border: none;
+  color: white;
+  padding: 10px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 5px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.btn-form {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.btn-success {
+  background-color: #4caf50;
+}
+
+.btn-primary {
+  background-color: #2076a8;
+  margin: 0px 10px;
+}
+
+.btn-danger {
+  background-color: #ff4d4f;
+}
+
+.table {
+  position: relative;
+}
+
+.form-data div {
+  margin-bottom: 20px;
+}
+
+.form-data label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.mt-21vh {
+  margin-top: 21vh;
+}
+
+.flex_box {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.flex_items {
+  width: 49%;
+  border: 1px solid #000;
+}
+
+.pd-25px {
+  padding: 25px;
+}
+
+.form-data {
+  margin-top: 2rem;
+}
+
+.form-select {
+  height: 42px;
+  font-size: 14px;
+  width: 100%;
+  color: #555;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-control {
+  display: block;
+  width: 95%;
+  height: 28px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: rgb(60, 60, 138);
+}
+
+.box {
+  border: 1px solid #000;
+  margin-bottom: 3rem;
+  margin-top: 2rem;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 96%;
+  height: 60px;
+  background: #6cf;
+  padding: 15px 15px 0px;
+}
+
+.footer p {
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 13px;
+}
+
+.controls-item {
+  width: 45%;
+  display: flex;
+}
+
+.mb-2rem {
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 1199px) {
+  .flex_items {
+    width: 100%;
+    border: 1px solid #000;
+  }
+}
