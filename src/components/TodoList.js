@@ -11,20 +11,21 @@ const getRandomId = () => {
 
 function TodoList() {
   const [selectedId, setSelectedId] = useState(0);
-  const [dataTable, setDataTable] = useState([]);
+  const [todoList, setTodoList] = useState([]);
   const [selectedTask, setSelectedTask] = useState(null);
-  const dataList = JSON.parse(localStorage.getItem("todoList"));
 
   useEffect(() => {
     getData();
   }, []);
 
   function getData() {
-    setDataTable(dataList);
+    const dataList = JSON.parse(localStorage.getItem("todoList")) || [];
+    setTodoList(dataList);
   }
 
   const handleUpdateDataList = (data) => {
-    let tasks = dataList?.length ? dataList : [];
+    let tasks = JSON.parse(localStorage.getItem("todoList")) || [];
+
     if (!data.id) {
       const obj = {
         ...data,
@@ -32,7 +33,7 @@ function TodoList() {
       };
       tasks.unshift(obj);
     } else {
-      const val = dataList.map((item) => {
+      const newArr = todoList.map((item) => {
         if (item.id === data.id) {
           return {
             ...data,
@@ -46,22 +47,29 @@ function TodoList() {
           return item;
         }
       });
-      tasks = [...val];
+      tasks = [...newArr];
     }
+
     tasks.sort((a, b) => {
       return new Date(a.dateTime) - new Date(b.dateTime);
     });
-    setDataTable(tasks);
+
     localStorage.setItem("todoList", JSON.stringify(tasks));
+    getData();
     setSelectedTask(null);
     setSelectedId(0);
   };
 
   const handleSearch = (keyword) => {
-    const tasks = dataList.filter((task) => {
-      return task.name.toLowerCase().indexOf(keyword.toLowerCase()) > -1;
-    });
-    setDataTable(tasks);
+    if (keyword.trim()) {
+      const dataList = JSON.parse(localStorage.getItem("todoList")) || [];
+      const tasks = dataList.filter((task) => {
+        return task.name.toLowerCase().indexOf(keyword.toLowerCase()) > -1;
+      });
+      setTodoList(tasks);
+    } else {
+      getData();
+    }
   };
 
   const handleUpdateTask = (data) => {
@@ -72,27 +80,36 @@ function TodoList() {
   };
 
   const handleRemoveTask = (id) => {
+    const dataList = JSON.parse(localStorage.getItem("todoList"));
     const tasks = dataList.filter((item) => item.id !== id);
-    setDataTable(tasks);
     localStorage.setItem("todoList", JSON.stringify(tasks));
+    setTodoList(tasks);
   };
 
   const handleRemoveMulTask = () => {
-    const newArr = [...dataTable];
-    const selectedItems = newArr.filter((item) => item.isCheck);
+    const dataList = JSON.parse(localStorage.getItem("todoList"));
+    const newArr = [...todoList];
+    const selectedItems = newArr
+      .filter((item) => item.isCheck)
+      .map((item) => item.id);
     if (
       window.confirm(
         `Bạn có chắc chắn muốn xóa ${selectedItems.length} công việc`
       )
     ) {
-      const convertedArr = newArr.filter((item) => !item.isCheck);
-      setDataTable(convertedArr);
-      localStorage.setItem("todoList", JSON.stringify(convertedArr));
+      const result = dataList.filter(
+        (item) => !selectedItems.includes(item.id)
+      );
+
+      console.log(result);
+
+      localStorage.setItem("todoList", JSON.stringify(result));
+      setTodoList(result);
     }
   };
 
   const handleChangeCheckbox = (data) => {
-    let arr = [...dataTable];
+    let arr = [...todoList];
     const convertedArr = arr.map((item) => {
       if (item.id === data.id) {
         return {
@@ -104,7 +121,7 @@ function TodoList() {
       }
     });
 
-    setDataTable(convertedArr);
+    setTodoList(convertedArr);
   };
 
   return (
@@ -125,9 +142,9 @@ function TodoList() {
                 To do List
               </h2>
               <SearchField onSearch={(keyword) => handleSearch(keyword)} />
-              <div className="">
-                {dataTable?.length > 0 ? (
-                  dataTable.map((item, index) => {
+              <div>
+                {todoList?.length > 0 ? (
+                  todoList.map((item, index) => {
                     return (
                       <div className="box" key={item.id}>
                         <div
@@ -186,7 +203,7 @@ function TodoList() {
             </div>
             <BulkActionBox
               onRemoveMulTask={() => handleRemoveMulTask()}
-              dataList={dataTable}
+              dataList={todoList}
             />
           </div>
         </div>

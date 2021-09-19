@@ -40,9 +40,7 @@ function Form(props) {
     if (!formValue.name) {
       alert("Vui lòng nhập tên công việc!");
     } else {
-      // if (!selectedTask) {
       formValue.isCheck = false;
-      // }
       onSuccess(formValue);
       setFormValue({
         id: "",
