@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 
 function BulkActionBox(props) {
   const { dataList, onRemoveMulTask } = props;
+
+  // eslint-disable-next-line no-unused-vars
+  const [data, setData] = useState(0);
 
   return (
     <>
